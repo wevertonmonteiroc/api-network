@@ -39,6 +39,7 @@
 				Home/Service/HomeService.swift,
 				Home/ViewModel/HomeViewModel.swift,
 				HomeViewController.swift,
+				Model/PersonList.swift,
 				SceneDelegate.swift,
 			);
 			target = 1C84E4292DFE2FAA00D7E3E4 /* PrimeiroAppNetworkCurso */;
