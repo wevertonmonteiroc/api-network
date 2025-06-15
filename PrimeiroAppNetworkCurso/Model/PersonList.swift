@@ -8,7 +8,7 @@
 import Foundation
 
 struct PersonList: Codable {
-    var persons: [Person]
+    var person: [Person]
 }
 
 struct Person: Codable {

@@ -11,9 +11,18 @@ class HomeViewModel: NSObject {
     
     var services: HomeService = HomeService()
     
-    
+    init(services: HomeService = HomeService()) {
+        self.services = services
+    }
 
     public func fetchRequest() {
-        
+        self.services.getPersonList { result in
+            switch result {
+            case .success(let success):
+                print(success)
+            case .failure(let failure):
+                print(failure.errorDescription ?? "")
+            }
+        }
     }
 }

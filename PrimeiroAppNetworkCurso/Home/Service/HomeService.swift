@@ -36,7 +36,7 @@ extension NetworkError: LocalizedError {
 
 class HomeService: NSObject {
     
-    public func fetchRequest(completion: @escaping (Result<PersonList,NetworkError>) -> Void) {
+    public func getPersonList(completion: @escaping (Result<PersonList,NetworkError>) -> Void) {
         let urlString: String = "https://run.mocky.io/v3/1328d142-9a04-44a2-861f-510b44b8ba92"
         
         guard let url: URL = URL(string: urlString) else {
@@ -44,13 +44,13 @@ class HomeService: NSObject {
             return
         }
         
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error ) in
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error {
                 completion(.failure(.networkFailure(error)))
                 return
             }
             
-            guard let data = data else {
+            guard let data else {
                 completion(.failure(.noData))
                 return
             }
