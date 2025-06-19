@@ -7,16 +7,21 @@
 
 import UIKit
 
+protocol HomeViewModelProtocol: AnyObject {
+    func sucess()
+    func error(message: String)
+}
+
 class HomeViewModel: NSObject {
     
-    var services: HomeService = HomeService()
+    var service: HomeService = HomeService()
     
     init(services: HomeService = HomeService()) {
-        self.services = services
+        self.service = services
     }
 
     public func fetchRequest() {
-        self.services.getPersonList { result in
+        self.service.getPersonList { result in
             switch result {
             case .success(let success):
                 print(success)

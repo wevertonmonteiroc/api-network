@@ -46,27 +46,35 @@ class HomeService: NSObject {
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error {
-                completion(.failure(.networkFailure(error)))
+                DispatchQueue.main.async {
+                    completion(.failure(.networkFailure(error)))
+                }
                 return
             }
             
             guard let data else {
-                completion(.failure(.noData))
+                DispatchQueue.main.async {
+                    completion(.failure(.noData))
+                }
                 return
             }
             
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                completion(.failure(.invalidResponse))
+                DispatchQueue.main.async {
+                    completion(.failure(.invalidResponse))
+                }
                 return
             }
             
             do {
                 let personList: PersonList = try JSONDecoder().decode(PersonList.self, from: data)
-                print("SUCESS -> \(#function)")
-                completion(.success(personList))
+                DispatchQueue.main.async {
+                    completion(.success(personList))
+                }
             } catch {
-                print("ERROR -> \(#function)")
-                completion(.failure(.decodingError(error)))
+                DispatchQueue.main.async {
+                    completion(.failure(.decodingError(error)))
+                }
             }
         }
         task.resume()
