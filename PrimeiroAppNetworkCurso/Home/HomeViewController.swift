@@ -14,12 +14,12 @@ class HomeViewController: UIViewController {
     
     override func loadView() {
         self.screen = HomeScreen()
-        self.view = self.screen
+        self.view = screen
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel.fetchRequest()
+        viewModel.fetchRequest()
         viewModel.delegate(delegate: self)
     }
 }

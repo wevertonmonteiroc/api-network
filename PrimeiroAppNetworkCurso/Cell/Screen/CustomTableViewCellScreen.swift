@@ -11,6 +11,7 @@ class CustomTableViewCellScreen: UIView {
     
     lazy var nameLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
@@ -18,6 +19,7 @@ class CustomTableViewCellScreen: UIView {
     
     lazy var surnameLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 16)
         return label
@@ -25,6 +27,7 @@ class CustomTableViewCellScreen: UIView {
     
     lazy var phoneLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 16)
         return label

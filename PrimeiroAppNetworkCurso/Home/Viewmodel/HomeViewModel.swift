@@ -21,16 +21,25 @@ class HomeViewModel: NSObject {
     public func delegate(delegate: HomeViewModelProtocol?) {
         self.delegate = delegate
     }
-
-
+    
     public func fetchRequest() {
-        self.service.getPersonList { result in
+        service.getPersonList { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let success):
-                print(success)
+                personList = success.person
+                delegate?.sucess()
             case .failure(let failure):
-                print(failure.errorDescription ?? "")
+                delegate?.error(message: failure.errorDescription ?? "")
             }
         }
+    }
+    
+    public var numberOfRowsInSection: Int {
+        return personList.count
+    }
+    
+    func loadCurrentPerson(indexPath: IndexPath) -> Person {
+        return personList[indexPath.row]
     }
 }

@@ -5,21 +5,12 @@
 //  Created by Weverton on 18/06/25.
 //
 
-
-//
-//  CustomTableViewCell.swift
-//  PrimeiroAppNetworkCurso
-//
-//  Created by Weverton on 17/06/25.
-//
-
-
 import UIKit
 
 class CustomTableViewCell: UITableViewCell {
-
-    static let identifier: String = "CustomTableViewCell"
     
+    static let identifier: String = "CustomTableViewCell"
+
     lazy var screen: CustomTableViewCellScreen = {
         let view = CustomTableViewCellScreen()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -29,11 +20,11 @@ class CustomTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
-        addSubview()
+        addSubView()
         setupConstraints()
     }
     
-    private func addSubview() {
+    private func addSubView() {
         contentView.addSubview(screen)
     }
     
@@ -44,9 +35,9 @@ class CustomTableViewCell: UITableViewCell {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             screen.topAnchor.constraint(equalTo: contentView.topAnchor),
-            screen.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             screen.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            screen.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+            screen.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            screen.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     
