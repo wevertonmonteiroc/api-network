@@ -36,47 +36,15 @@ extension NetworkError: LocalizedError {
 
 class HomeService: NSObject {
     
-    public func getPersonList(completion: @escaping (Result<PersonList,NetworkError>) -> Void) {
+    public func getPersonList(completion: @escaping (Result<[Person],NetworkError>) -> Void) {
         let urlString: String = "https://run.mocky.io/v3/1328d142-9a04-44a2-861f-510b44b8ba92"
-        
-        guard let url: URL = URL(string: urlString) else {
-            completion(.failure(.invalidURL(url: urlString)))
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error {
-                DispatchQueue.main.async {
-                    completion(.failure(.networkFailure(error)))
-                }
-                return
-            }
-            
-            guard let data else {
-                DispatchQueue.main.async {
-                    completion(.failure(.noData))
-                }
-                return
-            }
-            
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                DispatchQueue.main.async {
-                    completion(.failure(.invalidResponse))
-                }
-                return
-            }
-            
-            do {
-                let personList: PersonList = try JSONDecoder().decode(PersonList.self, from: data)
-                DispatchQueue.main.async {
-                    completion(.success(personList))
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    completion(.failure(.decodingError(error)))
-                }
+        ServiceManager.shared.request(with: urlString, method: .post, decodeType: PersonList.self) { result in
+            switch result {
+            case .success(let success):
+                completion(.success(success.person))
+            case .failure(let failure):
+                completion(.failure(failure))
             }
         }
-        task.resume()
     }
 }
