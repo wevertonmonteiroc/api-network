@@ -44,6 +44,10 @@
 				Home/Viewmodel/HomeViewModel.swift,
 				PersonList.swift,
 				SceneDelegate.swift,
+				Service/Endpoint.swift,
+				Service/HTTPMethod.swift,
+				Service/NetworkError.swift,
+				Service/NetworkLayer.swift,
 				Service/ServiceManager.swift,
 			);
 			target = 1C84E4292DFE2FAA00D7E3E4 /* PrimeiroAppNetworkCurso */;
