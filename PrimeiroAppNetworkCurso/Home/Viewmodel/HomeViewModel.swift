@@ -15,10 +15,13 @@ protocol HomeViewModelProtocol: AnyObject {
 class HomeViewModel: NSObject {
     
     var service: HomeService = HomeService()
+    var personList: [Person] = []
+    private weak var delegate: HomeViewModelProtocol?
     
-    init(services: HomeService = HomeService()) {
-        self.service = services
+    public func delegate(delegate: HomeViewModelProtocol?) {
+        self.delegate = delegate
     }
+
 
     public func fetchRequest() {
         self.service.getPersonList { result in
